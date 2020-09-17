@@ -1,7 +1,7 @@
 # Bank API
 
 
-RESTful API for Banking Management developed in Spring.
+RESTful API for Banking Management developed in Spring. Case study on a web application.
 
 # Description
 
