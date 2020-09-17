@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="d-flex justify-content-between">
+      <h4>Register client</h4><br>
+    </div>
+    <hr>
+    <form class="form" [formGroup]="clientForm" id="clientForm" class="text-center" (ngSubmit)="onSubmit()">
+        <div class="row">
+                <mat-form-field class="float-right">
+                    <input type="text" maxlength=11  matInput formControlName="firstName" placeholder="First name" [ngClass]="{'is-invalid': clientForm.get('firstName').errors && clientForm.get('firstName').touched}">
+                    <mat-error *ngIf="clientForm.get('firstName').hasError('required') && clientForm.get('firstName').touched ">
+                        Please enter your first name
+                      </mat-error>
+                      <mat-error *ngIf="clientForm.get('firstName').errors?.pattern && clientForm.get('firstName').touched ">
+                        Please enter a valid name
+                      </mat-error>  
+                </mat-form-field>
+          </div>
+      <div class="row">
+              <mat-form-field class="float-right">
+                <input type="text" maxlength=11 matInput formControlName="lastName" placeholder="Last name"  [ngClass]="{'is-invalid': clientForm.get('lastName').errors && clientForm.get('lastName').touched}">
+                <mat-error *ngIf="clientForm.get('lastName').hasError('required') && clientForm.get('lastName').touched ">
+                    Please enter your last name
+                  </mat-error>
+                  <mat-error *ngIf="clientForm.get('lastName').errors?.pattern && clientForm.get('lastName').touched ">
+                    Please enter a valid name
+                  </mat-error>    
+            </mat-form-field>
+        </div> 
+        <div class="row">
+                <mat-form-field class="float-right">
+                  <input type="text" minlength=13 maxlength=13 numbersOnly matInput formControlName="cnp" placeholder="CNP" [ngClass]="{'is-invalid': clientForm.get('cnp').errors && clientForm.get('cnp').touched}">
+                  <mat-error *ngIf="clientForm.get('cnp').hasError('required') && clientForm.get('cnp').touched ">
+                    Please enter a CNP
+                  </mat-error>
+                  <mat-error *ngIf="(clientForm.get('cnp').hasError('minlength') || clientForm.get('cnp').hasError('maxlength')) || clientForm.get('cnp').errors?.pattern">
+                      Please enter a valid CNP
+                    </mat-error>
+                </mat-form-field>
+          </div> 
+          <div class="row">
+            <mat-form-field class="float-right" (click)="picker.open()">
+              <input [readonly]="true" [max]="maxDate" formControlName="doB" matInput [matDatepicker]="picker" placeholder="Date of birth" [ngClass]="{'is-invalid': clientForm.get('doB').errors && clientForm.get('doB').touched}">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker touchUi disabled="false" #picker></mat-datepicker>
+              <mat-error *ngIf="clientForm.get('doB').hasError('required') && clientForm.get('doB').touched ">
+                Choose your date of birth
+              </mat-error>
+            </mat-form-field>
+          </div> 
+          <div class="row">
+                <mat-form-field class="float-right">
+                  <input type="text" maxlength=11 matInput formControlName="poB" placeholder="Place of birth" [ngClass]="{'is-invalid': clientForm.get('poB').errors && clientForm.get('poB').touched}">
+                  <mat-error *ngIf="clientForm.get('poB').hasError('required') && clientForm.get('poB').touched ">
+                    Please enter your place of birth
+                  </mat-error>
+                  <mat-error *ngIf="clientForm.get('poB').errors?.pattern && clientForm.get('poB').touched ">
+                    Please enter a valid place of birth
+                  </mat-error>  
+                </mat-form-field>
+
+          </div> 
+          <div class="row">
+            <mat-form-field class="float-right">
+              <input type="text" numbersOnly maxlength=20 matInput formControlName="phone" placeholder="Phone number" [ngClass]="{'is-invalid': clientForm.get('phone').errors && clientForm.get('phone').touched}">
+              <mat-error *ngIf="clientForm.get('phone').hasError('required') && clientForm.get('phone').touched ">
+                Please enter your phone number
+              </mat-error>
+              <mat-error *ngIf="clientForm.get('phone').errors?.pattern && clientForm.get('phone').touched ">
+                Please enter a valid phone number
+              </mat-error>  
+            </mat-form-field>
+
+      </div> 
+          <hr>
+          <button mat-raised-button type="submit" [disabled]="clientForm.invalid">Add</button>
+    </form>
+  </div>

@@ -1,0 +1,31 @@
+<mat-card class="w-100 my-3">
+   <div class="my-4">
+     <div class="mx-4">
+        <strong>Account name:</strong> <mat-label class="float-right">{{account.accountName}}</mat-label><br>
+        <strong>IBAN:</strong> <mat-label class="float-right">{{account.iban}}</mat-label>
+     </div>
+     <div class="m-5">
+        <strong>Balance:</strong> <mat-label class="float-right">{{account.amount}} {{account.currencyName}}</mat-label>
+     </div>
+     <div class="my-2">
+        <button (click)="Transactions()" mat-raised-button style="background-color: #2fb31b;" class="btn-block">
+            View transactions
+          </button>
+        <button (click)="TransferInOtherAccount()" mat-raised-button color="primary" class="btn-block">
+          Transfer
+        </button>
+        <button (click)="TransferInMyOtherAccount()" mat-raised-button style="background-color: #1abc9c;" class="btn-block">
+          Transfer to my other accounts
+         </button>
+        <button (click)="Deposit()" mat-raised-button style="background-color: #f1c40f;"class="btn-block">
+          Deposit
+        </button>
+        <button (click)="Withdraw()" mat-raised-button style="background-color: #c7ecee;" class="btn-block">
+          Withdraw
+        </button>
+        <button (click)="DeleteAccount()" style="background-color: #e74c3c;" mat-raised-button color="primary" class="btn-block mt-4">
+          Delete account
+        </button>
+     </div>
+   </div>
+</mat-card>

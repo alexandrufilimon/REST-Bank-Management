@@ -1,0 +1,15 @@
+<div class="m-3">
+    <div class="d-flex justify-content-center">
+        <h4>Customer Login</h4>
+      </div>
+	<form [formGroup]="regForm" role="form" name="myForm">
+	<div class="form-group"><label>Your Name :</label>
+		<select class="form-control" formControlName="clientId" name="clientSelect" id="clientSelect" >
+	      <option value="">---Your Name---</option> <!-- not selected / blank option -->
+	      <option *ngFor="let client of clients" [ngValue]="client.id">{{client.firstName}} {{client.lastName}}</option>
+	    </select>
+	</div>
+	<button *ngIf="!clientSelect" class="btn btn-primary" (click)="onSubmit()">Login</button>
+	<button style="margin-left: 15px;" (click)="registerClient()" class="btn btn-primary">Register</button>
+	</form>
+</div>

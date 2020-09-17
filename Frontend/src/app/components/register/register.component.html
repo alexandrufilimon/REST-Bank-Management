@@ -1,0 +1,45 @@
+  <div class="container">
+    <div>
+        <h3 class="text-center m-3"><a routerLink="/myAccount/{{this.clientId}}" ><img src="https://cdn1.iconfinder.com/data/icons/user-interface-outline-7/512/ui_ux_left_back_return-64.png"></a>Open new account</h3>
+      <form class="form" [formGroup]="accountForm" id="accountForm" (ngSubmit)="onSubmit()" class=" text-center">
+          <div class="row mt-1">
+              <div class="form-group col-6">
+                  <mat-form-field class="full-width w-100">
+                    <input type="text" maxlength=11  matInput formControlName="accountName" placeholder="Account name" [ngClass]="{'is-invalid': accountForm.get('accountName').errors && accountForm.get('accountName').touched}">
+                      <mat-error *ngIf="accountForm.get('accountName').hasError('required') && accountForm.get('accountName').touched ">
+                          Write your first name
+                        </mat-error>
+                        <mat-error *ngIf="accountForm.get('accountName').errors?.pattern && accountForm.get('accountName').touched ">
+                          Write a valid name
+                        </mat-error>
+                    </mat-form-field>
+              </div>
+              <div class="form-group col-6">
+                <mat-form-field class="full-width w-100">
+                  <mat-select [(ngModel)]="selectedValue" formControlName="currencyName" placeholder="Currency">
+                    <mat-option value="EURO">EURO</mat-option>
+                    <mat-option value="POUNDS">POUNDS</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountForm.get('currencyName').hasError('required') && accountForm.get('currencyName').touched ">
+                        Please select a currency type
+                      </mat-error>
+                  </mat-form-field>
+                </div>
+            </div>
+        <div class="row">
+            <div class="form-group col-6">
+                <mat-form-field class="full-width w-100">
+                  <input type="password" numbersOnly maxlength=4 matInput formControlName="pinCode" placeholder="PIN"  [ngClass]="{'is-invalid': accountForm.get('pinCode').errors && accountForm.get('pinCode').touched}">
+                    <mat-error *ngIf="accountForm.get('pinCode').hasError('required') && accountForm.get('pinCode').touched ">
+                        Enter a PIN
+                      </mat-error>
+                      <mat-error *ngIf="(accountForm.get('pinCode').hasError('minlength') || accountForm.get('pinCode').hasError('maxlength')) || accountForm.get('pinCode').errors?.pattern">
+                          Enter a valid PIN
+                        </mat-error>
+                  </mat-form-field>
+            </div>
+          </div> 
+      </form>
+            <button [disabled]="!accountForm.valid" type="submit" mat-stroked-button color="primary" class="py-1" form="accountForm">Create</button>
+    </div>
+  </div>

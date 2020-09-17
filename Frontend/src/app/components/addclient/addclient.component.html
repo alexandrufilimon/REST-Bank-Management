@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="d-flex justify-content-between">
+      <h4><a routerLink="/managerLogin"><img src="https://cdn1.iconfinder.com/data/icons/user-interface-outline-7/512/ui_ux_left_back_return-64.png"></a> New client</h4>
+    </div>
+    <hr>
+    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+      <div class="form-group col-12">
+        <mat-form-field class="w-100">
+          <input type="text" maxlength=20 matInput formControlName="firstName" placeholder="First name" [ngClass]="{'is-invalid': clientForm.get('firstName').errors && clientForm.get('firstName').touched}">
+          <mat-error *ngIf="clientForm.get('firstName').hasError('required') && clientForm.get('firstName').touched ">
+              Please enter your first name
+            </mat-error>
+            <mat-error *ngIf="clientForm.get('firstName').errors?.pattern && clientForm.get('firstName').touched ">
+              Please enter a valid name
+            </mat-error>
+        </mat-form-field>
+          <mat-form-field class="w-100">
+            <input type="text" maxlength=20 matInput formControlName="lastName" placeholder="Last name" [ngClass]="{'is-invalid': clientForm.get('lastName').errors && clientForm.get('lastName').touched}">
+            <mat-error *ngIf="clientForm.get('lastName').hasError('required') && clientForm.get('lastName').touched ">
+                Please enter your last name
+              </mat-error>
+              <mat-error *ngIf="clientForm.get('lastName').errors?.pattern && clientForm.get('lastName').touched ">
+                Please enter a valid name
+              </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input type="text" numbersOnly maxlength=11  matInput formControlName="cnp" placeholder="CNP" [ngClass]="{'is-invalid': clientForm.get('cnp').errors && clientForm.get('cnp').touched}">
+            <mat-error *ngIf="clientForm.get('cnp').hasError('required') && clientForm.get('cnp').touched ">
+                Please enter a CNP
+              </mat-error>
+              <mat-error *ngIf="(clientForm.get('cnp').hasError('minlength') || clientForm.get('cnp').hasError('maxlength')) || clientForm.get('cnp').errors?.pattern">
+                  Please enter a valid CNP
+                </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input type="text" maxlength=20 matInput formControlName="poB" placeholder="Place of birth" [ngClass]="{'is-invalid': clientForm.get('poB').errors && clientForm.get('poB').touched}">
+            <mat-error *ngIf="clientForm.get('poB').hasError('required') && clientForm.get('poB').touched ">
+                Please enter your place of birth
+              </mat-error>
+              <mat-error *ngIf="clientForm.get('poB').errors?.pattern && clientForm.get('poB').touched ">
+                Please enter a valid place of birth
+              </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100" (click)="picker.open()">
+            <input [readonly]="true" [max]="maxDate" formControlName="doB" matInput [matDatepicker]="picker" placeholder="Date of birth" [ngClass]="{'is-invalid': clientForm.get('doB').errors && clientForm.get('doB').touched}">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi disabled="false" #picker></mat-datepicker>
+            <mat-error *ngIf="clientForm.get('doB').hasError('required') && clientForm.get('doB').touched ">
+                Choose your date of birth
+              </mat-error>
+          </mat-form-field>
+          </div>
+      </div>
+      <button mat-raised-button type="submit" [disabled]="clientForm.invalid">Add</button>
+    </form>
+  </div>

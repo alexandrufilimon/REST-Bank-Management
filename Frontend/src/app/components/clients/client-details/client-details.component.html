@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="d-flex justify-content-between">
+      <h4>Client details</h4><br>
+    </div>
+    <hr>
+    <form class="form" [formGroup]="clientForm" id="clientForm" class=" text-center">
+        <div class="row">
+                <strong style="margin-top: 20px; margin-right: 10px;">First name:</strong>
+                <mat-form-field class="float-right">
+                    <input type="text" maxlength=11  matInput formControlName="firstName" [ngClass]="{'is-invalid': clientForm.get('firstName').errors && clientForm.get('firstName').touched}">
+                  </mat-form-field>
+          </div>
+      <div class="row">
+                <strong style="margin-top: 20px; margin-right: 10px;">Last name:</strong>
+              <mat-form-field class="float-right">
+                <input type="text" maxlength=11 matInput formControlName="lastName"  [ngClass]="{'is-invalid': clientForm.get('lastName').errors && clientForm.get('lastName').touched}">
+                </mat-form-field>
+        </div> 
+        <div class="row">
+            <strong style="margin-top: 20px; margin-right: 10px;">CNP:</strong>
+                <mat-form-field class="float-right">
+                  <input type="text" numbersOnly matInput formControlName="cnp" [ngClass]="{'is-invalid': clientForm.get('cnp').errors && clientForm.get('cnp').touched}">
+                  </mat-form-field>
+          </div> 
+          <div class="row">
+            <strong style="margin-top: 20px; margin-right: 10px;">Date of birth:</strong>
+            <mat-form-field class="float-right" (click)="picker.open()">
+              <input [readonly]="true" [max]="maxDate" formControlName="doB" matInput [matDatepicker]="picker" placeholder="Date of birth" [ngClass]="{'is-invalid': clientForm.get('doB').errors && clientForm.get('doB').touched}">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker touchUi disabled="false" #picker></mat-datepicker>
+            </mat-form-field>
+          </div> 
+          <div class="row">
+            <strong style="margin-top: 20px; margin-right: 10px;">Place of birth:</strong>
+                <mat-form-field class="float-right">
+                  <input type="text" maxlength=11 matInput formControlName="poB" [ngClass]="{'is-invalid': clientForm.get('poB').errors && clientForm.get('poB').touched}">
+                  </mat-form-field>
+          </div> 
+
+    </form>
+      <hr>
+      <button mat-raised-button type="submit" [disabled]="editing == '0'" style="background-color: #b9be68; margin:5px;" (click)="enableEdit()">Edit</button>
+      <button mat-raised-button type="submit" [disabled]="editing != '0'" style="background-color: #6f71ec;" (click)="editClient()">Save</button>
+      <button mat-raised-button type="submit" style="margin:5px; background-color: #e74c3c;" (click)="deleteClient()">Delete</button>
+  </div>

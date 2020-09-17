@@ -1,0 +1,74 @@
+<div class="padT20">
+	<div class="center">
+		<button style="margin:5px;" ng-class="btnClass1" class="btn btn-primary" routerLink="/managerLogin">Accounts
+		</button>
+		<button style="margin:5px;" ng-class="btnClass2" class="btn btn-primary" routerLink="/managerLogin/openAccount">Open Account
+		</button>
+				<button style="margin:5px;" ng-class="btnClass1" class="btn btn-primary" routerLink="/managerLogin/addClient">Add Client
+		</button>
+		<button style="margin:5px;" ng-class="btnClass3" class="btn btn-primary" routerLink="/managerLogin/clients">Clients
+		</button>
+		<h3 class="m-4 text-center">
+			All clients accounts</h3>
+		<h5 class="m-4 text-center">Accounts: {{ getTotalAccounts() }}, Clients: {{ getTotalClients() }}</h5>
+	</div>
+	<div class="" ui-view>
+		<div class="marTop" style="max-height: 100%;overflow: scroll;">
+
+			<form>
+			  <div class="form-group">
+				<div class="input-group">
+				  <div class="input-group-addon"><i class="fa fa-search"></i></div>
+				  <input type="text" class="form-control" placeholder="Search Customer" ng-model="searchCustomer">
+				</div>      
+			  </div>
+			</form>
+	  
+	  <div style="height:250px;">
+		  <table class="table table-bordered table-striped" >
+		  
+		  <thead>
+			<tr>
+			  <td>
+				<a href="/managerLogin" ng-click="sortType = 'account.client.firstName'; sortReverse = !sortReverse">
+				  Cardholder
+				  <span ng-show="sortType == 'account.client.firstName' && !sortReverse" class="fa fa-caret-down"></span>
+				  <span ng-show="sortType == 'account.client.firstName' && sortReverse" class="fa fa-caret-up"></span>
+				</a>
+			  </td>
+			  <td>
+					CNP
+			  </td>
+			  <td>
+				Date of birth
+			  </td>
+			  <td>
+				<a href="/managerLogin" ng-click="sortType = 'account.client.poB'; sortReverse = !sortReverse">
+					Place of birth
+				  <span ng-show="sortType == 'account.client.poB' && !sortReverse" class="fa fa-caret-down"></span>
+				  <span ng-show="sortType == 'account.client.poB' && sortReverse" class="fa fa-caret-up"></span>
+				</a>
+			  </td>
+			  <td>
+				  Account IBAN
+				  <span style="font-size:11px">(click for more info)</span>
+
+			  </td>
+			</tr>
+		  </thead>
+		  
+		  <tbody>
+			<tr *ngFor="let account of accounts">
+			  <td>{{ account.client.firstName }} {{ account.client.lastName }}</td>
+			  <td>{{ account.client.cnp }}</td>
+			  <td>{{ account.client.doB }}</td>
+			  <td>{{ account.client.poB }}</td>
+			  <td><a (click)="getDetails(account)" style="text-decoration: underline; color: blue;">{{ account.iban }}</a> </td>
+			</tr>
+		  </tbody>
+		  
+		</table>
+	  </div>
+	  </div>
+	</div>
+</div>

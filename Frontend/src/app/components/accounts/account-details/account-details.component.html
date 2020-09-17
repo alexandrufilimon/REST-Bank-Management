@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="d-flex justify-content-between">
+      <h4>Account details</h4><br>
+    </div>
+    <strong>{{account.iban}}</strong><br>
+    <hr>
+    <form class="form" [formGroup]="accountForm" id="accountForm" class=" text-center">
+        <div class="row">
+                <strong style="margin-top: 20px; margin-right: 10px;">Account name:</strong>
+                <mat-form-field class="float-right">
+                    <input type="text" maxlength=11  matInput formControlName="accountName" [ngClass]="{'is-invalid': accountForm.get('accountName').errors && accountForm.get('accountName').touched}">
+                    <mat-error *ngIf="accountForm.get('accountName').hasError('required') && accountForm.get('accountName').touched ">
+                        Write your first name
+                      </mat-error>
+                      <mat-error *ngIf="accountForm.get('accountName').errors?.pattern && accountForm.get('accountName').touched ">
+                        Write a valid name
+                      </mat-error>
+                  </mat-form-field>
+          </div>
+      <div class="row">
+                <strong style="margin-top: 20px; margin-right: 10px;">PIN:</strong>
+              <mat-form-field class="float-right">
+                <input type="text" numbersOnly maxlength=4 matInput formControlName="pinCode"  [ngClass]="{'is-invalid': accountForm.get('pinCode').errors && accountForm.get('pinCode').touched}">
+                  <mat-error *ngIf="accountForm.get('pinCode').hasError('required') && accountForm.get('pinCode').touched ">
+                      Enter a PIN
+                    </mat-error>
+                    <mat-error *ngIf="(accountForm.get('pinCode').hasError('minlength') || accountForm.get('pinCode').hasError('maxlength')) || accountForm.get('pinCode').errors?.pattern">
+                        Enter a valid PIN
+                      </mat-error>
+                </mat-form-field>
+        </div> 
+        <div class="row">
+            <strong style="margin-top: 20px; margin-right: 10px;">Amount:</strong>
+                <mat-form-field class="float-right">
+                  <input type="text" numbersOnly matInput formControlName="amount" [ngClass]="{'is-invalid': accountForm.get('amount').errors && accountForm.get('amount').touched}">
+                    <mat-error *ngIf="accountForm.get('amount').hasError('required') && accountForm.get('amount').touched ">
+                        Enter an amount
+                      </mat-error>
+                      <mat-error *ngIf="(accountForm.get('amount').hasError('minlength') || accountForm.get('amount').hasError('maxlength')) || accountForm.get('amount').errors?.pattern">
+                          Enter a valid amount
+                        </mat-error>
+                  </mat-form-field>
+          </div> 
+        <div class="row">
+            <strong style="margin-top: 20px; margin-right: 10px;">Currency:</strong>
+                <mat-form-field class="float-right">
+                  <mat-select [(ngModel)]="selectedValue" formControlName="currencyName">
+                    <mat-option value="EURO">EURO</mat-option>
+                    <mat-option value="POUNDS">POUNDS</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="accountForm.get('currencyName').hasError('required') && accountForm.get('currencyName').touched ">
+                        Please select a currency type
+                      </mat-error>
+                  </mat-form-field>
+        </div>
+        <div class="row">
+          <strong style="margin-right: 10px;">Transactions:</strong><button style="padding: 0.2px;" class="btn btn-primary" (click)="manageTransactions()">See list</button>
+        </div>
+    </form>
+      <hr>
+      <button mat-raised-button type="submit" style="margin:5px;" (click)="resetPIN()">Reset PIN</button>
+      <button mat-raised-button type="submit" [disabled]="editing == '0'" style="background-color: #b9be68; margin:5px;" (click)="enableEdit()">Edit</button>
+      <button mat-raised-button type="submit" [disabled]="editing != '0'" style="background-color: #6f71ec;" (click)="editAccount()">Save</button>
+      <button mat-raised-button type="submit" style="margin:5px; background-color: #e74c3c;" (click)="deleteAccount()">Delete</button>
+  </div>

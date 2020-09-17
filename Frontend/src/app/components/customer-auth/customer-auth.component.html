@@ -1,0 +1,16 @@
+    <div class="container">
+        <div class="d-flex justify-content-between">
+          <h6>An authentication code has been sent to your phone number ********{{lastNumbers}}. Please enter the code below:</h6>
+        </div>
+        <hr>
+        <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+          <div class="form-group col-12">
+              <mat-form-field class="w-100">
+                <input placeholder="Code" type="password" numbersOnly maxlength=4 matInput formControlName="authCode" [ngClass]="{'is-invalid': authForm.get('authCode').errors && authForm.get('authCode').touched}">
+              </mat-form-field>
+              </div>
+          </div>
+          <button mat-raised-button type="submit" [disabled]="authForm.invalid">Verify</button>
+        </form>
+      </div>

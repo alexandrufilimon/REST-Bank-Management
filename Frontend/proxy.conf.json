@@ -1,0 +1,7 @@
+{
+    "*": {
+        "target": "https://app.smso.ro/api",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
